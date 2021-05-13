@@ -8,6 +8,7 @@ FOLDER_TO_RECOVER_PATTERN_SEARCH=
 VERBOSE="echo"
 #VERBOSE=":" # To disable print
 
+
 if [ -z "${DEVICE_NAME}" ]; then
     lsblk
     read -p "Enter the device to recover " DEVICE_NAME
@@ -24,7 +25,7 @@ if [ -z "${FOLDER_TO_RECOVER_PATTERN_SEARCH}" ]; then
 fi
 
 ${VERBOSE} "Pattern researched \"${FOLDER_TO_RECOVER_PATTERN_SEARCH}\""
-if [ -z ${FOLDER_TO_RECOVER_PATTERN_SEARCH} ]; then
+if [ -z "${FOLDER_TO_RECOVER_PATTERN_SEARCH}" ]; then
     echo "whole disk"
     echo "not tested"
     exit 1
@@ -33,9 +34,9 @@ fi
 if [ -z "${DESTINATION_FOLDER}" ]; then
     read -p "Enter the destination folder for the recovery " DESTINATION_FOLDER   
 fi
-mkdir -p ${DESTINATION_FOLDER}
+mkdir -p "${DESTINATION_FOLDER}"
 
-FOLDER_RES=$(fls -o${OFFSET_PARTITION} ${DEVICE_NAME}  | grep ${FOLDER_TO_RECOVER_PATTERN_SEARCH})
+FOLDER_RES=$(fls -o${OFFSET_PARTITION} ${DEVICE_NAME}  | grep "${FOLDER_TO_RECOVER_PATTERN_SEARCH}")
 FOLDER_INODE=$(echo ${FOLDER_RES} | awk '{ print $2}' | sed 's/:$//')
 FOLDER_NAME=$(echo ${FOLDER_RES} | sed 's/.\+:\s//') # Spaces managed
 ${VERBOSE} "Folder Inode ${FOLDER_INODE}"
@@ -47,10 +48,14 @@ LIST_FILES=$(echo "${LIST_ELEMENTS}" | grep "^r" )
 LIST_DIR=$(echo "${LIST_ELEMENTS}" | grep "^d" | sed 's/^d.\+:\t//'  )
 
 # Creating folder structure (spaces in folder's name are managed)
-#echo "${LIST_DIR}"| xargs -I {} mkdir -p "${DESTINATION_FOLDER}/${FOLDER_NAME}/{}"
 echo "${LIST_DIR}" | while read dir_name; do
     mkdir -p "${DESTINATION_FOLDER}/${FOLDER_NAME}/${dir_name}"
 done
+
+if [ -z "${LIST_FILES}" ]; then
+    echo "Empty folder"
+    exit 0
+fi
 
 echo "${LIST_FILES}" | while read file; do
     file_inode=$(echo ${file} | awk '{ print $2}' | sed 's/:$//')
