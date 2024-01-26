@@ -37,6 +37,7 @@ echo Ok !
 nic+=($( lspci | grep Eth | awk '{ print $1 }' ))
 #nic+=($( lspci | grep Eth | awk '{ print $1 }' | sed 's/:/\\&/'))
 
+# without lspci tools : grep PCI_SLOT_NAME /sys/class/net/*/device/uevent | awk -F= '{print $2}'
 
 ACTION=":"
 
