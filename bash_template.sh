@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# Template to create a bash script
 
 # ------------------------------------------------------------
 # Script to <do some wonderful tasks>

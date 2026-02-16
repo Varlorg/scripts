@@ -1,4 +1,6 @@
 #!/bin/bash
+# List network info based on pci info
+
 #set -x
 name="NAME"
 nic=($name)

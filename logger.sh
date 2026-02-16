@@ -1,5 +1,5 @@
 # color info https://misc.flogisoft.com/bash/tip_colors_and_formatting
-#
+# logger functions
 
 : "${LOG_PREFIX:=date --iso-8601=ns}"
 

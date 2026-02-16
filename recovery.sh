@@ -1,4 +1,5 @@
 #!/bin/bash
+# Recover recently deleted files
 
 DEVICE_NAME=
 

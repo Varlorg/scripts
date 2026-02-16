@@ -1,4 +1,5 @@
 #!/bin/bash
+# Clean Docker fs
 
 # Docker objects to list
 DOCKER_OBJECT="image container network volume"

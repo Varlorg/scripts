@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# script to launch function as cmd, ex ./template_cmd.sh <my_func>
+
 ###################
 # Variables       #
 ###################

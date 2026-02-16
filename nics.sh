@@ -1,4 +1,6 @@
 #!/bin/bash
+# List network info based iproute
+
 #set -x
 name="NAME"
 nic=($name)
